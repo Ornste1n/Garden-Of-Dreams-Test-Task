@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Builds
+  m_EditorClassIdentifier: 
+  m_GroupName: Builds
+  m_Data:
+    m_SerializedData: []
+  m_GUID: dab7bbb146123a849bf98dad04421415
+  m_SerializeEntries:
+  - m_GUID: 3bc5bc2c41cc9334389af7c68e8fdb35
+    m_Address: Assets/Game/Content/Prefabs/Bulding (Saloon).prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9025998718101246956020d065cfeb0
+    m_Address: Assets/Game/Content/Prefabs/Bulding (Purple).prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d92395f70169b8c4d98ac82468773c67
+    m_Address: Assets/Game/Content/Prefabs/Bulding (Red).prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 923f90bf219a6e4428c2fbc270105fa1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 4d2f9d64fa6207048b2e16a329fa7676, type: 2}
+    - {fileID: 11400000, guid: f3aaad9f81c38c7419bfacb7dabb0a67, type: 2}
