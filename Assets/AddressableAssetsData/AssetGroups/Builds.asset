@@ -22,6 +22,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f5445aa755f019458e9876d1c5fd0c3
+    m_Address: SaloonAtlas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b2a5d5cd48aff74aa6819c3eed5282f
+    m_Address: Buildings Atlas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a9025998718101246956020d065cfeb0
     m_Address: Assets/Game/Content/Prefabs/Bulding (Purple).prefab
     m_ReadOnly: 0
