@@ -37,6 +37,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf96c310f8340b743840042afe3d4695
+    m_Address: Bulding (Green)
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d92395f70169b8c4d98ac82468773c67
     m_Address: Assets/Game/Content/Prefabs/Bulding (Red).prefab
     m_ReadOnly: 0

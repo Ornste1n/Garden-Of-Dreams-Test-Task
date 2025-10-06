@@ -1,13 +1,6 @@
 {
   "entries": [
     {
-      "Id": "Green House",
-      "AssetGuid": "cf96c310f8340b743840042afe3d4695",
-      "AssetPath": "Assets/Game/Content/Prefabs/Bulding (Green).prefab",
-      "AtlasGuid": "9b2a5d5cd48aff74aa6819c3eed5282f",
-      "SpriteName": "buildings_3"
-    },
-    {
       "Id": "Purple House",
       "AssetGuid": "a9025998718101246956020d065cfeb0",
       "AssetPath": "Assets/Game/Content/Prefabs/Bulding (Purple).prefab",

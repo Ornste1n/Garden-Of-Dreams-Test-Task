@@ -1,0 +1,11 @@
+{
+  "entries": [
+    {
+      "Id": "Saloon",
+      "AssetGuid": "3bc5bc2c41cc9334389af7c68e8fdb35",
+      "AssetPath": "Assets/Game/Content/Prefabs/Bulding (Saloon).prefab",
+      "AtlasGuid": "8f5445aa755f019458e9876d1c5fd0c3",
+      "SpriteName": "saloon_0"
+    }
+  ]
+}
