@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
+using Game.Scripts.Domain.Application;
 using UnityEditor;
 using UnityEngine;
 using Newtonsoft.Json;
-using Game.Scripts.Infrastructure.Databases.Building;
+using Game.Scripts.Infrastructure.Data.Config;
 
 namespace Game.Scripts.Editor.BuildingConfigWindow
 {
@@ -13,22 +14,22 @@ namespace Game.Scripts.Editor.BuildingConfigWindow
 
         private static string GetDatabasePath() => DefaultRelativePath;
 
-        public static BuildingEntriesDb Load()
+        public static BuildingEntriesConfig Load()
         {
             string path = GetDatabasePath();
             if (File.Exists(path) == false)
             {
-                BuildingEntriesDb emptyDb = new();
-                Save(emptyDb);
+                BuildingEntriesConfig emptyEntriesConfig = new();
+                Save(emptyEntriesConfig);
                 AssetDatabase.Refresh();
-                return emptyDb;
+                return emptyEntriesConfig;
             }
 
             string json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<BuildingEntriesDb>(json) ?? new BuildingEntriesDb();
+            return JsonConvert.DeserializeObject<BuildingEntriesConfig>(json) ?? new BuildingEntriesConfig();
         }
 
-        private static void Save(BuildingEntriesDb db)
+        private static void Save(BuildingEntriesConfig entriesConfig)
         {
             string path = GetDatabasePath();
             string directory = Path.GetDirectoryName(path);
@@ -37,7 +38,7 @@ namespace Game.Scripts.Editor.BuildingConfigWindow
                 Directory.CreateDirectory(directory);
             }
 
-            string json = JsonConvert.SerializeObject(db, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(entriesConfig, Formatting.Indented);
             File.WriteAllText(path, json);
             AssetDatabase.ImportAsset(path);
             AssetDatabase.Refresh();
@@ -45,23 +46,23 @@ namespace Game.Scripts.Editor.BuildingConfigWindow
 
         public static void Add(BuildingEntry entry)
         {
-            BuildingEntriesDb db = Load();
-            db.AddEntry(entry);
-            Save(db);
+            BuildingEntriesConfig entriesConfig = Load();
+            entriesConfig.AddEntry(entry);
+            Save(entriesConfig);
         }
         
         public static bool Remove(string id)
         {
             if (string.IsNullOrEmpty(id)) return false;
 
-            BuildingEntriesDb db = Load();
-            if (db == null) return false;
+            BuildingEntriesConfig entriesConfig = Load();
+            if (entriesConfig == null) return false;
     
-            bool removed = db.RemoveEntry(id);
+            bool removed = entriesConfig.RemoveEntry(id);
             if (!removed) return false;
             
             BackupDatabaseFile();
-            Save(db);
+            Save(entriesConfig);
 
             return true;
         }

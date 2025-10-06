@@ -15,20 +15,6 @@
       "SpriteName": "buildings_0"
     },
     {
-      "Id": "Test1 House",
-      "AssetGuid": "d92395f70169b8c4d98ac82468773c67",
-      "AssetPath": "Assets/Game/Content/Prefabs/Bulding (Red).prefab",
-      "AtlasGuid": "9b2a5d5cd48aff74aa6819c3eed5282f",
-      "SpriteName": "buildings_1"
-    },
-    {
-      "Id": "Test2 House",
-      "AssetGuid": "d92395f70169b8c4d98ac82468773c67",
-      "AssetPath": "Assets/Game/Content/Prefabs/Bulding (Red).prefab",
-      "AtlasGuid": "9b2a5d5cd48aff74aa6819c3eed5282f",
-      "SpriteName": "buildings_2"
-    },
-    {
       "Id": "Saloon",
       "AssetGuid": "3bc5bc2c41cc9334389af7c68e8fdb35",
       "AssetPath": "Assets/Game/Content/Prefabs/Bulding (Saloon).prefab",

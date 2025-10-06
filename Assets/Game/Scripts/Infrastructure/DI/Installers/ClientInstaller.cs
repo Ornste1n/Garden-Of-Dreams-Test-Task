@@ -1,5 +1,5 @@
 ﻿using Zenject;
-using Game.Scripts.Infrastructure.Databases.Building;
+using Game.Scripts.Infrastructure.Data.Loader;
 
 namespace Game.Scripts.Infrastructure.DI.Installers
 {

@@ -1,11 +1,11 @@
 ﻿using System.IO;
+using Game.Scripts.Domain.Application;
 using UnityEditor;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
-using Game.Scripts.Infrastructure.Databases.Building;
 
 namespace Game.Scripts.Editor.BuildingConfigWindow
 {

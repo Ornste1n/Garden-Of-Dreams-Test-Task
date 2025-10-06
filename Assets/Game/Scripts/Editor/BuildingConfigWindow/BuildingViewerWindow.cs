@@ -3,14 +3,15 @@ using UnityEditor;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Game.Scripts.Domain.Application;
 using Sirenix.OdinInspector.Editor;
-using Game.Scripts.Infrastructure.Databases.Building;
+using Game.Scripts.Infrastructure.Data.Config;
 
 namespace Game.Scripts.Editor.BuildingConfigWindow
 {
     public sealed class BuildingViewerWindow : OdinEditorWindow
     {
-        [SerializeField] private BuildingEntriesDb _entriesDb;
+        [SerializeField] private BuildingEntriesConfig _entriesConfig;
 
         [SerializeField]
         [LabelText("Selected Entry Id")]
@@ -33,11 +34,11 @@ namespace Game.Scripts.Editor.BuildingConfigWindow
 
         private void LoadDatabase()
         {
-            _entriesDb = BuildingDatabaseService.Load();
+            _entriesConfig = BuildingDatabaseService.Load();
 
             // Если выбранный id отсутствует в новой базе — сбросить выбор
             if (string.IsNullOrEmpty(_selectedEntryId) == false &&
-                (_entriesDb == null || _entriesDb.Entries.All(e => e == null || e.Id != _selectedEntryId)))
+                (_entriesConfig == null || _entriesConfig.Entries.All(e => e == null || e.Id != _selectedEntryId)))
             {
                 _selectedEntryId = string.Empty;
             }
@@ -47,13 +48,13 @@ namespace Game.Scripts.Editor.BuildingConfigWindow
 
         [TableList, ShowInInspector]
         [ListDrawerSettings(Expanded = true, IsReadOnly = true, HideAddButton = true, HideRemoveButton = true)]
-        public IReadOnlyList<BuildingEntry> Entries => _entriesDb == null ? new List<BuildingEntry>() : _entriesDb.Entries;
+        public IReadOnlyList<BuildingEntry> Entries => _entriesConfig == null ? new List<BuildingEntry>() : _entriesConfig.Entries;
         
         private IEnumerable<string> GetEntryIds()
         {
-            if (_entriesDb == null || _entriesDb.Entries == null) yield break;
+            if (_entriesConfig == null || _entriesConfig.Entries == null) yield break;
 
-            foreach (var entry in _entriesDb.Entries)
+            foreach (var entry in _entriesConfig.Entries)
             {
                 if (entry == null) continue;
                 if (string.IsNullOrEmpty(entry.Id)) continue;

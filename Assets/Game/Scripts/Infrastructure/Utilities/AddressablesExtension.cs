@@ -38,44 +38,25 @@ namespace Game.Scripts.Infrastructure.Utilities
 
                     if (locationsHandle.Status == AsyncOperationStatus.Succeeded &&
                         locationsHandle.Result != null && locationsHandle.Result.Count != 0) return configFile;
-                    
+
                     return default;
                 }
-                catch (OperationCanceledException) { }
+                catch (OperationCanceledException)
+                {
+                }
                 finally
                 {
                     if (textHandle.IsValid())
                         Addressables.Release(textHandle);
                 }
             }
-            catch (OperationCanceledException) { }
+            catch (OperationCanceledException)
+            {
+            }
             finally
             {
                 if (locationsHandle.IsValid())
                     Addressables.Release(locationsHandle);
-            }
-
-            return default;
-        }
-
-        public static async UniTask<IList<T>> TryGetAssetsAsync<T>(string key, CancellationToken token)
-        {
-            AsyncOperationHandle<IList<T>> assetHandle = Addressables.LoadAssetsAsync<T>(key, null);
-            try
-            {
-                IList<T> asset = await assetHandle.ToUniTask(cancellationToken: token);
-
-                if (assetHandle.Status == AsyncOperationStatus.Succeeded &&
-                    assetHandle.Result != null && assetHandle.Result.Count != 0)
-                    return asset;
-
-                return default;
-            }
-            catch (OperationCanceledException) { }
-            finally
-            {
-                if (assetHandle.IsValid())
-                    Addressables.Release(assetHandle);
             }
 
             return default;

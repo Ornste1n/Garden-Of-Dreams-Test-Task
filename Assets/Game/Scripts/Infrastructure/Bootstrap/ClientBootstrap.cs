@@ -2,8 +2,8 @@ using Zenject;
 using UnityEngine;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Game.Scripts.Infrastructure.Databases.Building;
 using UnityEngine.SceneManagement;
+using Game.Scripts.Infrastructure.Data.Loader;
 
 namespace Game.Scripts.Infrastructure.Bootstrap
 {
