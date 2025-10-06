@@ -16,13 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: ba9c97933b172c448919238fb084aa63
-  m_SerializeEntries:
-  - m_GUID: a4f30747da219ee4f91fe1a86f5ae41b
-    m_Address: Assets/Game/Repository/buildings.json
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - BuildConfiguration
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 923f90bf219a6e4428c2fbc270105fa1, type: 2}
   m_SchemaSet:
