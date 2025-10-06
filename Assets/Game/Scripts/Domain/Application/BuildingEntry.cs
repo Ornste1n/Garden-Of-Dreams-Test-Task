@@ -3,14 +3,15 @@ using Newtonsoft.Json;
 
 namespace Game.Scripts.Domain.Application
 {
+    /// Класс для сериализации конфигурации зданий
     [Serializable]
     public sealed class BuildingEntry
     {
-        public string Id { get; private set; }
-        public string AssetGuid { get; private set; }
-        public string AssetPath { get; private set; }
-        public string AtlasGuid { get; private set; }
-        public string SpriteName { get; private set; }
+        public string Id ;
+        public string AssetGuid;
+        public string AssetPath;
+        public string AtlasGuid;
+        public string SpriteName;
         
         [JsonConstructor]
         public BuildingEntry(string id, string assetGuid, string assetPath, string atlasGuid, string spriteName)

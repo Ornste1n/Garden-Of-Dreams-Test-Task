@@ -10,6 +10,7 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 
 namespace Game.Scripts.Infrastructure.Utilities
 {
+    // Утилита для загрузки через Addressables
     public static class AddressablesExtension
     {
         public static async UniTask<T> TryGetAssetAsync<T>(string key, CancellationToken token)
@@ -41,18 +42,14 @@ namespace Game.Scripts.Infrastructure.Utilities
 
                     return default;
                 }
-                catch (OperationCanceledException)
-                {
-                }
+                catch (OperationCanceledException) { }
                 finally
                 {
                     if (textHandle.IsValid())
                         Addressables.Release(textHandle);
                 }
             }
-            catch (OperationCanceledException)
-            {
-            }
+            catch (OperationCanceledException) { }
             finally
             {
                 if (locationsHandle.IsValid())

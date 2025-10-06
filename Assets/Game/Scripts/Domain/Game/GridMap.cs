@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 namespace Game.Scripts.Domain.Game
 {
+    /// Содержит информацию о состоянии сетки (карты)
     public class GridMap
     {
         public int Width { get; }

@@ -8,12 +8,13 @@ using Game.Scripts.Usecases.Application.Interfaces;
 
 namespace Game.Scripts.Usecases.Game
 {
+    // Логика удаления здания
     public class DeleteBuildingUsecase : IDeleteBuildingUsecase, IDisposable
     {
         public event Action<Vector3> DeletePositionEvent;
         
-        private IPlacementInput _placementInput;
         private IGridRepository _gridRepository;
+        private IDisposable _placementDisposable;
         
         [Inject]
         private void Constructor
@@ -22,15 +23,12 @@ namespace Game.Scripts.Usecases.Game
             IGridRepository gridRepository
         )
         {
-            _placementInput = placementInput;
             _gridRepository = gridRepository;
-            _placementInput.OnDelete.Subscribe(HandleDeleteEvent);
+            _placementDisposable = placementInput.OnDelete.Subscribe(HandleDeleteEvent);
         }
 
         private void HandleDeleteEvent(Occupancy occupancy)
         {
-            Debug.Log("HandleDeleteEvent");
-            
             int x = Mathf.RoundToInt(occupancy.Position.X);
             int y = Mathf.RoundToInt(occupancy.Position.Y);
 
@@ -39,18 +37,26 @@ namespace Game.Scripts.Usecases.Game
             if (!result.Can) return;
 
             int index = _gridRepository.Map.OccupiedCells[x, y];
+
+            if (index < 0 || index >= _gridRepository.Map.Buildings.Count)
+                return;
+
             Occupancy removeOccupancy = _gridRepository.Map.Buildings[index];
-            
+
             foreach (Vector3 cell in removeOccupancy.OccupiedCells)
             {
                 int rX = Mathf.RoundToInt(cell.X + removeOccupancy.Position.X);
                 int rY = Mathf.RoundToInt(cell.Y + removeOccupancy.Position.Y);
 
+                if (rX < 0 || rY < 0 ||
+                    rX >= _gridRepository.Map.OccupiedCells.GetLength(0) ||
+                    rY >= _gridRepository.Map.OccupiedCells.GetLength(1))
+                    continue;
+
                 _gridRepository.Map.OccupiedCells[rX, rY] = -1;
             }
-            
-            Debug.Log($"Destroy: {index}");
-            _gridRepository.Map.Buildings[index] = default;
+
+            _gridRepository.Map.Buildings[index] = default; // Помечаю слот как удалённый
             DeletePositionEvent?.Invoke(result.Position);
         }
 
@@ -66,7 +72,7 @@ namespace Game.Scripts.Usecases.Game
 
         public void Dispose()
         {
-            
+            _placementDisposable?.Dispose();
         }
     }
 }

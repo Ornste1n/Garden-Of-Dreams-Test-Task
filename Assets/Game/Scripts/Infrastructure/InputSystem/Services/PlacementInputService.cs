@@ -8,6 +8,7 @@ using Game.Scripts.Usecases.Application.Messages;
 
 namespace Game.Scripts.Infrastructure.InputSystem.Services
 {
+    // Сервис для обработки ввода размещения зданий
     public class PlacementInputService : IDisposable
     {
         private Camera _camera;
@@ -31,13 +32,14 @@ namespace Game.Scripts.Infrastructure.InputSystem.Services
             _playerActions.Placement.Confirm.performed += HandlePlacementConfirm;
         }
 
+        // Обрабатываю клик, нахожу позицию тайла, отправляю сообщение
         private void HandlePlacementConfirm(InputAction.CallbackContext cxt)
         {
             Vector2 pointerPos = _playerActions.Placement.Pointer.ReadValue<Vector2>();
 
-            Vector3 world = _camera.ScreenToWorldPoint(
-                new Vector3(pointerPos.x, pointerPos.y, Mathf.Abs(_camera.transform.position.z - _tilemap.transform.position.z))
-            );
+            Vector3 world = _camera.ScreenToWorldPoint(new Vector3(pointerPos.x, pointerPos.y,
+                    Mathf.Abs(_camera.transform.position.z - _tilemap.transform.position.z)));
+            
             world.z = _tilemap.transform.position.z;
 
             Vector3Int cell = _tilemap.WorldToCell(world);

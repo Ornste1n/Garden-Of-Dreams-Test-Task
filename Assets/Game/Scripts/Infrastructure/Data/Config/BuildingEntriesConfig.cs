@@ -5,6 +5,7 @@ using Game.Scripts.Domain.Application;
 
 namespace Game.Scripts.Infrastructure.Data.Config
 {
+    /// Класс, нужный для серелизации конфига зданий 
     public class BuildingEntriesConfig
     {
         private readonly List<BuildingEntry> _entries = new();

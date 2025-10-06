@@ -7,6 +7,7 @@ using Game.Scripts.Usecases.Application.Interfaces;
 
 namespace Game.Scripts.Presentation.Presenters
 {
+    // Презентер, управляющий панелью управления зданиями
     public class BuildingPanelPresenter : IDisposable
     {
         private IBuildingPanelView _buildingPanelView;
@@ -15,6 +16,8 @@ namespace Game.Scripts.Presentation.Presenters
         private IPublisher<CanceledPlacementEvent> _canceledEventPublisher;
         private IPublisher<ChoicePlacementEvent> _choiceEventPublisher;
 
+        private IDisposable _instantiateDisposable;
+        
         [Inject]
         private void Constructor
         (
@@ -22,8 +25,8 @@ namespace Game.Scripts.Presentation.Presenters
             IBuildingSpritesConfig buildingSprites,
             IPublisher<DeletePlacementModeEvent> deletePublisher,
             IPublisher<CanceledPlacementEvent> canceledPublisher,
-            IPublisher<ChoicePlacementEvent> choicePublisher
-        )
+            IPublisher<ChoicePlacementEvent> choicePublisher,
+            ISubscriber<BuildingInstantiateEvent> instantiateSub)
         {
             _buildingPanelView = panelView;
             _deleteEventPublisher = deletePublisher;
@@ -35,6 +38,7 @@ namespace Game.Scripts.Presentation.Presenters
             _buildingPanelView.OnDeleteClicked += HandleDeleteEvent;
             
             _buildingPanelView.ShowBuildings(buildingSprites.Sprites);
+            _instantiateDisposable = instantiateSub.Subscribe(HandleInstantiate);
         }
         
         private void HandlePlaceEvent(string id)
@@ -42,6 +46,11 @@ namespace Game.Scripts.Presentation.Presenters
             _choiceEventPublisher?.Publish(new ChoicePlacementEvent(id));
         }
 
+        private void HandleInstantiate(BuildingInstantiateEvent _)
+        {
+            _buildingPanelView.ResetSelected();
+        }
+        
         private void HandleDeleteEvent()
         {
             HandleCanceledEvent();
@@ -53,6 +62,8 @@ namespace Game.Scripts.Presentation.Presenters
 
         public void Dispose()
         {
+            _instantiateDisposable?.Dispose();
+            _buildingPanelView.OnCanceled -= HandleCanceledEvent;
             _buildingPanelView.OnPlaceClicked -= HandlePlaceEvent;
             _buildingPanelView.OnDeleteClicked -= HandleDeleteEvent;
         }

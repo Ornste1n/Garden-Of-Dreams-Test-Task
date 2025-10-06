@@ -18,6 +18,8 @@ using SVectorF = System.Numerics.Vector<float>;
 
 namespace Game.Scripts.Infrastructure.Utilities
 {
+    // Утилита для преобразования UnityEngine.Vector в System.Numerics
+    // Так как в Domain слое нету Unity Engine зависимостей, там использую System.Numerics
     public static class ConverterExtensions
     {
         public static SVector2 ToSystem(this UVector2 vector) => new SVector2(vector.x, vector.y);

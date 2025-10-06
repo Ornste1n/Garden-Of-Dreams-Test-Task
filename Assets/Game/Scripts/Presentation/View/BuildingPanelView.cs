@@ -37,6 +37,25 @@ namespace Game.Scripts.Presentation.View
             _contentParent.gameObject.SetActive(false);
         }
 
+        public void ResetSelected()
+        {
+            if (_selectedItem == null) return;
+            
+            _selectedItem.SetOutline(false);
+            _selectedItem = null;
+        }
+        
+        public void SetActive(bool active)
+        {
+            if (!active && _selectedItem != null)
+            {
+                _selectedItem.SetOutline(false);
+                _selectedItem = null;
+            }
+
+            _contentParent.gameObject.SetActive(active);
+        }
+
         private void HandleSelectEvent(BuildingItemView itemView)
         {
             if(_selectedItem != null)
@@ -54,28 +73,13 @@ namespace Game.Scripts.Presentation.View
 
             if (contentState)
             {
-                if (_selectedItem != null)
-                {
-                    _selectedItem.SetOutline(false);
-                    _selectedItem = null;
-                }
+                ResetSelected();
                 OnCanceled?.Invoke();
             }
             
             _contentParent.gameObject.SetActive(!contentState);
         }
-
-        public void SetActive(bool active)
-        {
-            if (!active && _selectedItem != null)
-            {
-                _selectedItem.SetOutline(false);
-                _selectedItem = null;
-            }
-
-            _contentParent.gameObject.SetActive(active);
-        }
-
+        
         private void HandleDeleteButton() => OnDeleteClicked?.Invoke();
 
         private void OnDestroy()

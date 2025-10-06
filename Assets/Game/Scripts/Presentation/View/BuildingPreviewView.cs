@@ -11,27 +11,27 @@ namespace Game.Scripts.Presentation.View
         [SerializeField] private Color _ghostColor = new Color(1f, 1f, 1f, 0.6f);
         [SerializeField] private Color _errorColor = new Color(1f, 1f, 1f, 0.6f);
 
-        private SpriteRenderer _sr;
+        private SpriteRenderer _spriteRenderer;
         private Color _origColor;
         
         public bool IsVisible { get; private set; }
 
         private void Awake()
         {
-            _sr = GetComponent<SpriteRenderer>();
-            _origColor = _sr.color;
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _origColor = _spriteRenderer.color;
             Hide();
         }
 
         public void Show(Sprite sprite)
         {
             if (sprite == null) return;
-            _sr.sprite = sprite;
-            _sr.enabled = true;
+            _spriteRenderer.sprite = sprite;
+            _spriteRenderer.enabled = true;
             if (_showGhostColor)
             {
                 Color c = _ghostColor;
-                _sr.color = c;
+                _spriteRenderer.color = c;
             }
 
             IsVisible = true;
@@ -39,24 +39,24 @@ namespace Game.Scripts.Presentation.View
 
         public void Hide()
         {
-            _sr.enabled = false;
-            _sr.sprite = null;
-            _sr.color = _origColor;
+            _spriteRenderer.enabled = false;
+            _spriteRenderer.sprite = null;
+            _spriteRenderer.color = _origColor;
             IsVisible = false;
         }
 
         public void SetPosition(Vector3 worldPos, bool isFreePlace)
         {
             transform.position = new Vector3(worldPos.x, worldPos.y, worldPos.z + _zOffset);
-            _sr.color = isFreePlace ? _ghostColor : _errorColor;
+            _spriteRenderer.color = isFreePlace ? _ghostColor : _errorColor;
         }
 
         public void SetAlpha(float alpha)
         {
-            if (_sr.sprite == null) return;
-            Color c = _sr.color;
+            if (_spriteRenderer.sprite == null) return;
+            Color c = _spriteRenderer.color;
             c.a = Mathf.Clamp01(alpha);
-            _sr.color = c;
+            _spriteRenderer.color = c;
         }
     }
 }

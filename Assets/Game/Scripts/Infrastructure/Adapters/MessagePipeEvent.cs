@@ -4,6 +4,7 @@ using Game.Scripts.Usecases.Application.Interfaces;
 
 namespace Game.Scripts.Infrastructure.Adapters
 {
+    /// Адаптер-представление подписчика MessagePipe в IEvent
     public class MessagePipeEvent<TIn, TOut> : IEvent<TOut>
     {
         private readonly ISubscriber<TIn> _subscriber;

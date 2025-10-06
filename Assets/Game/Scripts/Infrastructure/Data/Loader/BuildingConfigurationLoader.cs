@@ -14,9 +14,10 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Game.Scripts.Infrastructure.Data.Loader
 {
+    /// Загрузчик конфигурации зданий
     public class BuildingConfigurationLoader : ResourceLoader
     {
-        private const string BuildConfigurationLabel = "BuildConfiguration";
+        private const string BuildConfigurationLabel = "BuildConfiguration"; // Label файла конфигурации
         
         protected override async UniTask LoadResource(CancellationToken token)
         {
@@ -41,10 +42,11 @@ namespace Game.Scripts.Infrastructure.Data.Loader
             await LoadSprites(entriesConfig.Entries, token);
         }
         
+        /// Загружаю аталсы спрайтов, в которых содержатся спрайты зданий
         private async UniTask LoadSprites(IReadOnlyList<BuildingEntry> entries, CancellationToken token)
         {
             List<IGrouping<string, BuildingEntry>> atlasGroups =
-                entries.GroupBy(x => x.AtlasGuid).ToList();
+                entries.GroupBy(x => x.AtlasGuid).ToList(); // ищу общие атласы по guid
             
             Dictionary<string, Sprite> buildingSprites = new(entries.Count);
             List<AsyncOperationHandle<Sprite[]>> spriteHandles = new(atlasGroups.Count);
@@ -62,7 +64,7 @@ namespace Game.Scripts.Infrastructure.Data.Loader
                 {
                     foreach (Sprite atlasSprite in atlasSprites)
                     {
-                        if (buildingEntry.SpriteName == atlasSprite.name)
+                        if (buildingEntry.SpriteName == atlasSprite.name) // если есть внутри подходящий спрайт добавляем
                             buildingSprites.Add(buildingEntry.Id, atlasSprite);
                     }
                 }

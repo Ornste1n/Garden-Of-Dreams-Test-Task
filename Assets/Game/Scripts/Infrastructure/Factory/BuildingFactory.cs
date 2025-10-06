@@ -11,6 +11,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Game.Scripts.Infrastructure.Factory
 {
+    // Фабрика зданий
     public class BuildingFactory : IBuildingFactory
     {
         private Tilemap _tilemap;
@@ -30,6 +31,7 @@ namespace Game.Scripts.Infrastructure.Factory
             _instantiatePublisher = instantiatePublisher;
         }
 
+        // Создаю асинхронно здания по Id
         public async UniTask<GameObject> CreateAsync(string id, System.Numerics.Vector3 position)
         {
             if (string.IsNullOrEmpty(id)) return null;
@@ -40,17 +42,15 @@ namespace Game.Scripts.Infrastructure.Factory
                 return null;
             }
 
-            // Гарантируем выполнение на главном потоке перед вызовом Addressables/Instantiate/Unity API
-            await UniTask.SwitchToMainThread();
+            await UniTask.SwitchToMainThread(); // Гарантируем выполнение на главном потоке 
 
-            // Теперь безопасно работать с Addressables и Tilemap API
             Vector3Int relativeCell = new Vector3Int(
-                Mathf.RoundToInt((float)position.X),
-                Mathf.RoundToInt((float)position.Y),
-                Mathf.RoundToInt((float)position.Z)
+                Mathf.RoundToInt(position.X),
+                Mathf.RoundToInt(position.Y),
+                Mathf.RoundToInt(position.Z)
             );
 
-            Vector3Int absoluteCell = relativeCell + _tilemap.cellBounds.min;
+            Vector3Int absoluteCell = relativeCell + _tilemap.cellBounds.min; 
 
             if (!_tilemap.cellBounds.Contains(absoluteCell))
             {
@@ -60,24 +60,14 @@ namespace Game.Scripts.Infrastructure.Factory
 
             Vector3 worldPos = _tilemap.GetCellCenterWorld(absoluteCell);
 
-            // Рekomмендую InstantiateAsync: загружает ресурс и создаёт инстанс
-            var handle = Addressables.InstantiateAsync(address, worldPos, Quaternion.identity);
+            AsyncOperationHandle<GameObject> handle 
+                = Addressables.InstantiateAsync(address, worldPos, Quaternion.identity);
 
             try
             {
                 GameObject instance = await handle.ToUniTask();
-
-                if (instance == null)
-                {
-                    Debug.LogError($"Addressables.InstantiateAsync returned null for {address}");
-                    return null;
-                }
-
-                Debug.Log($"Instantiate succeeded: {instance.name}");
-                _instantiatePublisher?.Publish(new BuildingInstantiateEvent(relativeCell, instance));
-
-                // Не вызывать Addressables.Release(handle) при InstantiateAsync — чтобы корректно управлять инстансом, 
-                // при удалении используйте Addressables.ReleaseInstance(instance)
+                _instantiatePublisher?.Publish(new BuildingInstantiateEvent(relativeCell, instance, handle));
+  
                 return instance;
             }
             catch (Exception ex)
@@ -87,6 +77,5 @@ namespace Game.Scripts.Infrastructure.Factory
                 return null;
             }
         }
-
     }
 }

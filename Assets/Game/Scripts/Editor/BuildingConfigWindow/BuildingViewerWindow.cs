@@ -3,8 +3,8 @@ using UnityEditor;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using Game.Scripts.Domain.Application;
 using Sirenix.OdinInspector.Editor;
+using Game.Scripts.Domain.Application;
 using Game.Scripts.Infrastructure.Data.Config;
 
 namespace Game.Scripts.Editor.BuildingConfigWindow

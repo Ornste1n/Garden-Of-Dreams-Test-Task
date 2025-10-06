@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
-using Game.Scripts.Domain.Application;
 using UnityEditor;
 using UnityEngine;
 using Newtonsoft.Json;
+using Game.Scripts.Domain.Application;
 using Game.Scripts.Infrastructure.Data.Config;
 
 namespace Game.Scripts.Editor.BuildingConfigWindow

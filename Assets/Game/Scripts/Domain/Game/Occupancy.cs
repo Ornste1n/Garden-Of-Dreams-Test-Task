@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace Game.Scripts.Domain.Game
 {
+    /// Информация о здании на сетке
     public struct Occupancy
     {
-        public string Guid;
+        public string Guid; 
         public Vector2 Size;
         public Vector3 Position;
-        public List<Vector3> OccupiedCells;
+        public List<Vector3> OccupiedCells; // Ячейки которые он занимает
         
         public override string ToString()
         {

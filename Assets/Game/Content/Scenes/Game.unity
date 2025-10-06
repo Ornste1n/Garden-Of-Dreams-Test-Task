@@ -6165,8 +6165,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 772621870}
-  - component: {fileID: 772621871}
   - component: {fileID: 772621869}
+  - component: {fileID: 772621874}
+  - component: {fileID: 772621873}
+  - component: {fileID: 772621872}
+  - component: {fileID: 772621871}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -6188,6 +6191,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
+  - {fileID: 772621874}
+  - {fileID: 772621873}
+  - {fileID: 772621872}
   - {fileID: 772621871}
   _installerPrefabs: []
   _autoRun: 1
@@ -6230,14 +6236,50 @@ MonoBehaviour:
   m_GameObject: {fileID: 772621868}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e81ff7b6183f4770bec0ced4b5a7a110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &772621872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772621868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56459e53e23147ef8b2a117a9c1f35b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buildingPanelView: {fileID: 732740233}
+  _buildingPreviewPresenter: {fileID: 1907144440}
+  _gridHighlighterView: {fileID: 875846253}
+  _mainTilemap: {fileID: 338894123}
+  _menuView: {fileID: 975689345}
+--- !u!114 &772621873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772621868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79def60f874b4ed6bc78d8ddb34e4d19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &772621874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772621868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47d03b8e63eb46f3aebff428b1e3930e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _menuView: {fileID: 975689345}
-  _buildingPanelView: {fileID: 732740233}
-  _gridHighlighterView: {fileID: 875846253}
-  _buildingPreviewPresenter: {fileID: 1907144440}
-  _mainTilemap: {fileID: 338894123}
 --- !u!1 &875846248
 GameObject:
   m_ObjectHideFlags: 0
@@ -7550,50 +7592,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1871889897
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1871889899}
-  - component: {fileID: 1871889898}
-  m_Layer: 0
-  m_Name: Game Test
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1871889898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1871889897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82dae2d10f3948e4be27ae72764a08a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1871889899
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1871889897}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4815869, y: 1.0441549, z: -0.008834685}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1907144439
 GameObject:
   m_ObjectHideFlags: 0
@@ -7700,7 +7698,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 1871889899}
   - {fileID: 772621870}
   - {fileID: 509506233}
   - {fileID: 534844587}

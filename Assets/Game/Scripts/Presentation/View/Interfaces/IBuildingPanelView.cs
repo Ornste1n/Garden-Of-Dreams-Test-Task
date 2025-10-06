@@ -8,6 +8,7 @@ namespace Game.Scripts.Presentation.View.Interfaces
     {
         void ShowBuildings(IReadOnlyDictionary<string, Sprite> buildings);
         void SetActive(bool active);
+        void ResetSelected();
         
         event Action<string> OnPlaceClicked;
         event Action OnCanceled;

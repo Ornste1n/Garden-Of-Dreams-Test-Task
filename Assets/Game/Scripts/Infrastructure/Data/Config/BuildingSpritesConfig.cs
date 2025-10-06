@@ -6,12 +6,12 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Game.Scripts.Infrastructure.Data.Config
 {
+    /// Отдельное хранилище спрайтов зданий
     public class BuildingSpritesConfig : IBuildingSpritesConfig
     {
-        // key is building id, value is building sprite
-        public IReadOnlyDictionary<string, Sprite> Sprites { get; }
+        public IReadOnlyDictionary<string, Sprite> Sprites { get; } // key Id здания, value его спрайт
         
-        private readonly List<AsyncOperationHandle<Sprite[]>> _asyncOperation;
+        private readonly List<AsyncOperationHandle<Sprite[]>> _asyncOperation; // для выгрузки
         
         public BuildingSpritesConfig
         (

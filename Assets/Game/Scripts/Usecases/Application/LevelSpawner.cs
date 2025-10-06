@@ -8,11 +8,12 @@ using Game.Scripts.Usecases.Application.Interfaces;
 
 namespace Game.Scripts.Usecases.Application
 {
+    // Логика пересоздания зданий после загрузки
     public class LevelSpawner : IDisposable
     {
-        private IGridRepository _repo;
         private ILevelEvent _levelEvent;
         private IBuildingFactory _factory;
+        private IGridRepository _gridRepository;
         
         [Inject]
         private void Constructor
@@ -22,35 +23,34 @@ namespace Game.Scripts.Usecases.Application
             ILevelEvent levelEvent
         )
         {
-            _repo = repo;
+            _gridRepository = repo;
             _factory = factory;
             _levelEvent = levelEvent;
 
             _levelEvent.LoadedEvent.Subscribe(SpawnAllAsync);
         }
         
-        private async void SpawnAllAsync(LevelLoadedEvent eLoadedEvent)
+        private void SpawnAllAsync(LevelLoadedEvent eLoadedEvent)
         {
-            for (var i = 0; i < _repo.Map.Buildings.Count; i++)
+            for (var i = 0; i < _gridRepository.Map.Buildings.Count; i++)
             {
-                Occupancy build = _repo.Map.Buildings[i];
+                Occupancy build = _gridRepository.Map.Buildings[i];
                 
                 if(build.Guid == null) continue;
                 
+                // Заново просчитываем оккупированные ячейки
                 foreach (System.Numerics.Vector3 cell in build.OccupiedCells)
                 {
                     int x = Mathf.RoundToInt(cell.X + build.Position.X);
                     int y = Mathf.RoundToInt(cell.Y + build.Position.Y);
                 
-                    _repo.Map.OccupiedCells[x, y] = i;
+                    _gridRepository.Map.OccupiedCells[x, y] = i;
                 }
                 
-                _factory.CreateAsync(build.Guid, build.Position);
+                _factory.CreateAsync(build.Guid, build.Position).Forget();
             }
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

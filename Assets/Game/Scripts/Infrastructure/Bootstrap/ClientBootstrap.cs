@@ -7,9 +7,10 @@ using Game.Scripts.Infrastructure.Data.Loader;
 
 namespace Game.Scripts.Infrastructure.Bootstrap
 {
+    /// Точка входа в приложение
     public class ClientBootstrap : MonoBehaviour
     {
-        private CancellationTokenSource _tokenSource;
+        private CancellationTokenSource _tokenSource; // для загрузки ресурсов
         private BuildingConfigurationLoader _buildingConfigurationLoader;
         
         [Inject]
@@ -22,10 +23,7 @@ namespace Game.Scripts.Infrastructure.Bootstrap
             _buildingConfigurationLoader.LoadAsync(_tokenSource.Token).Forget();
         }
 
-        private void SwitchScene()
-        {
-            SceneManager.LoadScene("Game");
-        }
+        private void SwitchScene() => SceneManager.LoadScene("Game");
 
         private void OnDestroy()
         {

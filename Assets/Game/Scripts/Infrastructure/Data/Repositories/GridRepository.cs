@@ -11,12 +11,14 @@ using Game.Scripts.Usecases.Application.Interfaces;
 
 namespace Game.Scripts.Infrastructure.Data.Repositories
 {
+    // Реализация IGridRepository
     public class GridRepository : IGridRepository
     {
         public GridMap Map { get; private set; }
 
+        /// Я прокидываю Tilemap для упрощения, здесь может быть конфигурация карты
         [Inject]
-        private void Constructor(Tilemap tilemap)
+        private void Constructor(Tilemap tilemap) 
         {
             Vector3Int boundsSize = tilemap.cellBounds.size;
             int width = Math.Max(1, boundsSize.x);

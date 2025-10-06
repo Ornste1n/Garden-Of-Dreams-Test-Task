@@ -7,6 +7,7 @@ using Cysharp.Threading.Tasks;
 
 namespace Game.Scripts.Infrastructure.Data.Persistence
 {
+    // Утилита для сериализации/десериализации
     public static class JsonSaver
     {
         public static async UniTask SaveAsync<T>(T obj, string path, CancellationToken ct = default)

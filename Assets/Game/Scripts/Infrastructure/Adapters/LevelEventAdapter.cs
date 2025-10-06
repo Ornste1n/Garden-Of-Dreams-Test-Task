@@ -1,21 +1,19 @@
-﻿using MessagePipe;
+﻿using System;
+using MessagePipe;
 using Game.Scripts.Usecases.Application.Messages;
 using Game.Scripts.Usecases.Application.Interfaces;
 
 namespace Game.Scripts.Infrastructure.Adapters
 {
+    /// Адаптер уровня; предоставляет IEvent на событие загрузки уровня
     public class LevelEventAdapter : ILevelEvent
     {
         public IEvent<LevelLoadedEvent> LoadedEvent { get; }
         
-        private ISubscriber<LevelLoadedEvent> _posSubscriber;
-        
-        public LevelEventAdapter
-        (
-            ISubscriber<LevelLoadedEvent> subscriber
-        )
+        public LevelEventAdapter(ISubscriber<LevelLoadedEvent> levelLoadedSub)
         {
-            LoadedEvent = new MessagePipeEvent<LevelLoadedEvent, LevelLoadedEvent>(subscriber,msg =>(true, msg));
+            LoadedEvent = new MessagePipeEvent<LevelLoadedEvent, LevelLoadedEvent>(levelLoadedSub,
+                msg =>(true, msg));
         }
     }
 }

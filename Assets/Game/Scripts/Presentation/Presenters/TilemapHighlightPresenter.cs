@@ -8,6 +8,7 @@ using Game.Scripts.Usecases.Application.Messages;
 
 namespace Game.Scripts.Presentation.Presenters
 {
+    // Презентер, отвечающий за подсветку сетки
     public class TilemapHighlightPresenter : IDisposable
     {
         private IDisposable _choiceSub;
@@ -50,6 +51,7 @@ namespace Game.Scripts.Presentation.Presenters
             _gridView.SetValidity(true);
         }
         
+        // Рассчитываю границы видимой зоны (что улавливает камеры)
         private void CalculateVisibleCells()
         {
             Tilemap tilemap = _tilemap;
@@ -100,7 +102,7 @@ namespace Game.Scripts.Presentation.Presenters
 
         private void CreateOrResizeMask(int width, int height)
         {
-            const int maxSize = 4096;
+            const int maxSize = 4096; // по-хорошему вынести в конфиг
             int w = Mathf.Clamp(width, 1, maxSize);
             int h = Mathf.Clamp(height, 1, maxSize);
 
@@ -118,6 +120,7 @@ namespace Game.Scripts.Presentation.Presenters
             ClearMaskPixels();
         }
         
+        // Очищаем текстуру
         private void ClearMaskPixels()
         {
             if(_maskTexture == null) return;
@@ -129,6 +132,7 @@ namespace Game.Scripts.Presentation.Presenters
             _gridView.ApplyMask();
         }
         
+        // Границы зоны камеры
         private Vector3[] CameraWorldRectOnZ(Camera cam, float z)
         {
             Vector3[] corners = new Vector3[4];

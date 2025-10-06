@@ -3,6 +3,7 @@ using Game.Scripts.Infrastructure.Data.Loader;
 
 namespace Game.Scripts.Infrastructure.DI.Installers
 {
+    // Инсталлер для загрузочной сцены
     public class ClientInstaller : MonoInstaller
     {
         public override void InstallBindings()
